@@ -1,16 +1,13 @@
 language: cpp
-sudo: false
+sudo: true
 dist: trusty
 
-addons:
-  apt:
-    sources:
-    - ubuntu-toolchain-r-test
-    - llvm-toolchain-trusty-6.0
-    packages:
-    - clang++-6.0
-    - g++-7.2
+before_install:
+  - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+  - sudo apt-get update -q
+  - sudo apt-get install g++-7 -y
 
 script:
-  - clang++-6.0 --version
-  - g++-7.2 --version
+  - g++-7 --version
+  - g++-7 -o main main.cpp -std=c++17
+  - ./main
